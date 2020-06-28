@@ -15,13 +15,12 @@ In this demo, we will create a simple cisco configuration file
 - copy and paste script below and run.
 
 ```python
-import requests
+try:
+    import requests
+except Exception:
+    raise Exception("Install the requests library using 'pip install requests'")
 
-import json
-
-LCG_URL = "http://io.cbaxterjr.com/lcg/config"
-
-data = {
+cisco_model = {
     "opts": {
         "lab_name": "L3VPN_EXAMPLE",
         "dev_name": "R1",
@@ -244,20 +243,95 @@ data = {
     }
 }
 
+cumulus_model = {
+    "opts": {
+        "lab_name": "L3VPN_EXAMPLE",
+        "resp_type": "text",
+        "dev_name": "R1"
+    },
+    "data": {
+        "node_type": "cumulus_vx_config",
+        "hostname": "CMLX-RTR1",
+        "interfaces": [
+            {
+                "link_id": "sw1",
+                "description": "MGMT_LINK",
+                "ipv4_addrs": [
+                    {
+                        "address": "10.1.2.1",
+                        "cidr": "/30"
+                    },
+                    {
+                        "address": "10.1.4.1",
+                        "cidr": "/30"
+                    }
+                ],
+                "ipv6_addrs": [
+                    {
+                        "ipv6_address": "2001::1/128"
+                    }
+                ],
+                "ospf": {
+                    "p_id": "1",
+                    "area_id": "100",
+                    "network_type": "point-to-point",
+                    "priority": "0",
+                    "auth": {
+                        "message_digest": [
+                            {
+                                "key_id": "1",
+                                "val": "033bd94b1168d7e4f0d644c3c95e35bf"
+                            },
+                            {
+                                "key_id": "2",
+                                "val": "033bd94b1168d7e4f0d644c3c95e35bf"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "link_id": "swp2",
+                "bandwidth": "50",
+                "description": "R2",
+                "ipv4_addrs": [
+                    {
+                        "address": "10.1.6.1",
+                        "cidr": "/30"
+                    },
+                    {
+                        "address": "10.1.7.1",
+                        "cidr": "/30"
+                    }
+                ],
+                "ipv6_addrs": [
+                    {
+                        "ipv6_address": "2001:1:2::1/64"
+                    }
+                ]
+            }
+        ]
+    }
+
+}
 
 if __name__ == "__main__":
+    LCG_URL = "http://io.cbaxterjr.com/lcg/config"
+
     response = requests.post(url=LCG_URL,
-                             json=data, # Although the data varible is of dict type, we use the "json" arg for the request because it will automaticly convert the python dicontary into an JSON str that can be serialized accross the wire.
+                             json=cisco_model,
+                             # Although the data varible is of dict type, we use the "json" arg for the request because it will automaticly convert the python dicontary into an JSON str that can be serialized accross the wire.
                              headers={"Content-Type": "application/json"})
 
-    print(response.content.decode())
+    resp_str = response.content.decode()  # We execute the decode method because the http response received from the server returns the content in byte format. This will conver it to UTF-8.
+    print(resp_str)
+
 ```
 
 
 
-Results:**
-
-```json
+**Results:**
+```text
 enable
 config t
 hostname R1-CA-CORE

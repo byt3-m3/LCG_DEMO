@@ -12,7 +12,11 @@ In this demo, we will create a simple cisco configuration file
 
 - Computer running Python3 
 - requests library installed 
-- copy and paste script below and run.
+- Clone the repo and execute "python lcg_access.py".
+
+```bash
+git clone "https://github.com/byt3-m3/LCG_DEMO.git"
+```
 
 ```python
 try:

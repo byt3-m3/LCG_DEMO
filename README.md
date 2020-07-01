@@ -6,6 +6,9 @@ This document is a guide on how to use my free Lab Configuration Generator(LCG) 
 
 In this demo, we will create a simple cisco configuration file 
 
+To see a live demo check out the youtube link below:
+
+[Demo Video](https://youtu.be/GigmzpC4Db8)
 
 
 ## Preparation:

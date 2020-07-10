@@ -30,8 +30,7 @@ except Exception:
 cisco_model = {
     "opts": {
         "lab_name": "L3VPN_EXAMPLE",
-        "dev_name": "R1",
-        "resp_type": "text"
+        "dev_name": "R1"
     },
     "data": {
         "node_type": "ios_rtr",
@@ -250,80 +249,8 @@ cisco_model = {
     }
 }
 
-cumulus_model = {
-    "opts": {
-        "lab_name": "L3VPN_EXAMPLE",
-        "resp_type": "text",
-        "dev_name": "R1"
-    },
-    "data": {
-        "node_type": "cumulus_vx_config",
-        "hostname": "CMLX-RTR1",
-        "interfaces": [
-            {
-                "link_id": "sw1",
-                "description": "MGMT_LINK",
-                "ipv4_addrs": [
-                    {
-                        "address": "10.1.2.1",
-                        "cidr": "/30"
-                    },
-                    {
-                        "address": "10.1.4.1",
-                        "cidr": "/30"
-                    }
-                ],
-                "ipv6_addrs": [
-                    {
-                        "ipv6_address": "2001::1/128"
-                    }
-                ],
-                "ospf": {
-                    "p_id": "1",
-                    "area_id": "100",
-                    "network_type": "point-to-point",
-                    "priority": "0",
-                    "auth": {
-                        "message_digest": [
-                            {
-                                "key_id": "1",
-                                "val": "033bd94b1168d7e4f0d644c3c95e35bf"
-                            },
-                            {
-                                "key_id": "2",
-                                "val": "033bd94b1168d7e4f0d644c3c95e35bf"
-                            }
-                        ]
-                    }
-                }
-            },
-            {
-                "link_id": "swp2",
-                "bandwidth": "50",
-                "description": "R2",
-                "ipv4_addrs": [
-                    {
-                        "address": "10.1.6.1",
-                        "cidr": "/30"
-                    },
-                    {
-                        "address": "10.1.7.1",
-                        "cidr": "/30"
-                    }
-                ],
-                "ipv6_addrs": [
-                    {
-                        "ipv6_address": "2001:1:2::1/64"
-                    }
-                ]
-            }
-        ]
-    }
-
-}
-
 if __name__ == "__main__":
-    LCG_URL = "http://io.cbaxterjr.com/lcg/config"
+    LCG_URL = "http://apps.cbaxterjr.com:8080/api/v1/lcg/config"
 
     response = requests.post(url=LCG_URL,
                              json=cisco_model,

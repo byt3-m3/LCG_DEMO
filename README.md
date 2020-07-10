@@ -21,6 +21,162 @@ To see a live demo check out the youtube link below:
 git clone "https://github.com/byt3-m3/LCG_DEMO.git"
 ```
 
+GET Example - Use this example to get a blank data model to use for POST request. 
+```python
+try:
+    import requests
+except Exception:
+    raise Exception("Install the requests library using 'pip install requests'")
+
+resp = requests.get("http://apps.cbaxterjr.com/api/v1/lcg/config?node_type=ios_rtr")
+```
+
+**RESPONSE:**
+```json
+{
+  "data": {
+    "domain": "",
+    "hostname": "",
+    "interfaces": [
+      {
+        "description": "",
+        "ipv4_addrs": [
+          {
+            "address": "",
+            "netmask": ""
+          }
+        ],
+        "ipv6_addrs": [
+          {
+            "ipv6_address": ""
+          }
+        ],
+        "link_id": "lo0"
+      },
+      {
+        "bandwidth": "",
+        "description": "",
+        "ipv4_addrs": [
+          {
+            "address": "",
+            "netmask": ""
+          }
+        ],
+        "ipv6_addrs": [
+          {
+            "ipv6_address": ""
+          }
+        ],
+        "link_id": "Gi1",
+        "mpls": {
+          "ldp": false,
+          "mpls_te": false
+        },
+        "ospf": {
+          "area_id": "100",
+          "auth": {
+            "message_digest": [
+              {
+                "key_id": "1",
+                "val": "033bd94b1168d7e4f0d644c3c95e35bf"
+              },
+              {
+                "key_id": "2",
+                "val": "033bd94b1168d7e4f0d644c3c95e35bf"
+              }
+            ]
+          },
+          "network_type": "point-to-point",
+          "p_id": "1",
+          "priority": "0"
+        }
+      },
+      {
+        "bandwidth": "50",
+        "description": "R2",
+        "dot1q": "99",
+        "ipv4_addrs": [
+          {
+            "address": "10.1.2.1",
+            "netmask": "255.255.255.255"
+          }
+        ],
+        "ipv6_addrs": [
+          {
+            "ipv6_address": "2001:1:2::1/64"
+          }
+        ],
+        "link_id": "Gi1.99",
+        "mpls": {
+          "ldp": true,
+          "mpls_te": true
+        },
+        "ospf": {
+          "area_id": "100",
+          "auth": {
+            "message_digest": [
+              {
+                "key_id": "1",
+                "val": "033bd94b1168d7e4f0d644c3c95e35bf"
+              },
+              {
+                "key_id": "2",
+                "val": "033bd94b1168d7e4f0d644c3c95e35bf"
+              }
+            ]
+          },
+          "network_type": "point-to-point",
+          "p_id": "1",
+          "priority": "0"
+        }
+      }
+    ],
+    "node_type": "",
+    "snmpv2": [
+      {
+        "access_list": "",
+        "community": "",
+        "group_type": ""
+      }
+    ],
+    "snmpv3": [
+      {
+        "group_name": "",
+        "mode": "",
+        "peer": "",
+        "username": ""
+      },
+      {
+        "auth_alg": "",
+        "auth_pw": "",
+        "group_name": "",
+        "mode": "",
+        "peer": "",
+        "username": ""
+      },
+      {
+        "auth_alg": "",
+        "auth_pw": "",
+        "group_name": "",
+        "mode": "",
+        "peer": "",
+        "priv_alg": "",
+        "priv_pw": "",
+        "username": ""
+      }
+    ]
+  },
+  "opts": {
+    "dev_name": "",
+    "lab_name": "",
+    "resp_type": "text"
+  }
+}
+```
+
+
+
+POST Example - (python3 lcg_access.py)
 ```python
 try:
     import requests
@@ -262,9 +418,7 @@ if __name__ == "__main__":
 
 ```
 
-
-
-**Results:**
+**RESPONSE:**
 ```text
 enable
 config t
